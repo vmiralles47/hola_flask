@@ -1,5 +1,5 @@
 # VIEWS es el controlador del modelo vista-controlador, y TEMPLATE serían las vistas.
-from flask import render_template, request
+from flask import redirect, render_template, request, url_for
 
 from . import app
 from .models import ListaMovimientos, Movimiento
@@ -38,7 +38,8 @@ def add_movement():
         lista = ListaMovimientos()
         lista.leer_desde_archivo()
         lista.agregar(mov)
-        return str(lista)
+        # volvemos a la home pero como función (la def home()), no como ruta. por si cambiara.
+        return redirect(url_for("home"))
 
 
 @app.route("/modificar")
