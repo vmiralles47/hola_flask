@@ -16,12 +16,12 @@ def home():
     return render_template("inicio.html", movs=lista.movimientos)
 
 
-# le tenemos que decir a flask qué metodos tiene permitidos.
+# le tenemos que decir a flask qué metodos tiene permitidos.por defecto los métods POST, PUT o DELETE no los acepta FLASK
 @app.route("/nuevo", methods=["GET", "POST"])
 def add_movement():
     """
     Crea un movimiento nuevo y lo guarda en el archivo CSV
-    1. Recibo una petición GET: pintar el formulario
+    1. Recibo una petición GET: pintar el formulario. las peticiones GET no modifican datos
     2. Recibo una petición POST: 
         - Recojo los datos del formulario
         - Creo un objeto "movimiento" con esos datos
