@@ -35,6 +35,9 @@ def add_movement():
     if request.method == "POST":
         # resulta que esto devuelve un diccionario
         mov = Movimiento(request.form)
+        # aunque el formulario teiene control de errores, es responsabilidad del BACKEND el control de errores.
+        if mov.has_errors:
+            return f"Error: el movimiento no es válido. {mov.errores}"
         lista = ListaMovimientos()
         lista.leer_desde_archivo()
         lista.agregar(mov)

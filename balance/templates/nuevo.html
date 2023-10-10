@@ -22,7 +22,7 @@
 <form action="/nuevo" method="post">
     <div class="campo-formulario">
         <label for="fecha">Fecha</label>
-        <input type="date" name="fecha" id="fecha">
+        <input type="date" name="fecha" id="fecha" required>
     </div>
 
     <div class="campo-formulario">
@@ -39,7 +39,7 @@
 
     <div class="campo-formulario">
         <label for="cantidad">Cantidad</label>
-        <input type="number" name="cantidad" id="cantidad">
+        <input type="number" name="cantidad" id="cantidad" step=".01" min=".01">
     </div>
 
     <div class="acciones">
