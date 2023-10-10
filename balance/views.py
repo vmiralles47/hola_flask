@@ -1,8 +1,8 @@
 # VIEWS es el controlador del modelo vista-controlador, y TEMPLATE serían las vistas.
-from flask import render_template
+from flask import render_template, request
 
 from . import app
-from .models import ListaMovimientos
+from .models import ListaMovimientos, Movimiento
 
 
 @app.route("/")
@@ -16,12 +16,29 @@ def home():
     return render_template("inicio.html", movs=lista.movimientos)
 
 
+# le tenemos que decir a flask qué metodos tiene permitidos.
 @app.route("/nuevo", methods=["GET", "POST"])
 def add_movement():
     """
     Crea un movimiento nuevo y lo guarda en el archivo CSV
+    1. Recibo una petición GET: pintar el formulario
+    2. Recibo una petición POST: 
+        - Recojo los datos del formulario
+        - Creo un objeto "movimiento" con esos datos
+        - Validar que los datos son correctos, que el movimiento es válido (nos la saltamos)
+        - Utilizo la lista de movimientos apra agregar el movimiento
+        - Si todo es correcto, redireccionar a la lista de movimientos(home)
+
     """
-    return render_template("nuevo.html")
+    if request.method == "GET":
+        return render_template("nuevo.html")
+    if request.method == "POST":
+        # resulta que esto devuelve un diccionario
+        mov = Movimiento(request.form)
+        lista = ListaMovimientos()
+        lista.leer_desde_archivo()
+        lista.agregar(mov)
+        return str(lista)
 
 
 @app.route("/modificar")

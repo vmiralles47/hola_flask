@@ -9,8 +9,10 @@ CLAVES_IGNORADAS = ["errores"]
 
 class Movimiento:
     def __init__(self, dic_datos):
+        # TODO: no puedo tener fecha futura
 
         self.errores = []
+        # al usar el get, si hay un problema con la fecha, le pasa un dato vacío
         fecha = dic_datos.get("fecha", "")
         self.concepto = dic_datos.get("concepto", "Gastos varios")
         self.tipo = dic_datos.get("tipo")
